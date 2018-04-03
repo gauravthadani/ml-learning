@@ -3,6 +3,7 @@
 
 
 from sklearn import tree
+import graphviz
 
 
 #[height, weight, shoe size]
@@ -19,8 +20,11 @@ Y = ['male', 'female', 'female', 'female',
 
 
 clf = tree.DecisionTreeClassifier()
-
 clf = clf.fit(X,Y)
+
+dot_data = tree.export_graphviz(clf, out_file=None) 
+graph = graphviz.Source(dot_data)
+graph.render("gender_classifier")
 
 prediction = clf.predict([[190,70,43]])
 prediction_proba = clf.predict_proba([[190,70,43]])
